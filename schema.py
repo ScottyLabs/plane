@@ -39,7 +39,7 @@ gbm_reminder = PlaneSchema(
     f(Day.THURSDAY),
     {
         'reminder': m_gbm,
-    }
+    },
 )
 
-schema = [ weekly, longform, gbm_reminder ]
+schema = [ weekly, longform, gbm_reminder]
