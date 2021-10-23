@@ -1,4 +1,4 @@
-api_key = 'Your API key goes here.'
+api_key = 'Your Mailgun API key goes here.'
 domain = "scottylabs.org"
 sender = "ScottyLabs <hello@" + domain + ">"
 reply_to = "ScottyLabs <hello@" + domain + ">"

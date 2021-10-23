@@ -20,7 +20,7 @@
 
 9. Install requirement files by running: "python3 -m pip install -r requirements.txt"
 
-10. cd into the "plane" folder and transfer the file secrets.py into the "plane" folder. You can do this in Command Prompt with "mv ~/(PATH_TO_SECRETS.PY_HERE)/secrets.py ~/(PATH_TO_YOUR_PLANE_DIRECTORY_HERE)/secrets.py". 
+10. cd into the "plane" folder. You should see a secret_template.py file in there - rename it to "secrets.py", and insert your Mailgun API key in api_key.  
 
 11. Run plane.py for testing (You can do this in the plane directory with all the .py files by doing "python3 plane.py" in Command Prompt).
 
@@ -40,7 +40,7 @@
 
 6. Install requirement files by running: "python3 -m pip install -r requirements.txt"
 
-7. cd into the "plane" folder and transfer the file secrets.py into the "plane" folder. You can do this in Terminal with "mv ~/Downloads/secrets.py ~/(PATH_TO_YOUR_PLANE_DIRECTORY_HERE)/secrets.py". 
+7. cd into the "plane" folder. You should see a secret_template.py file in there - rename it to "secrets.py", and insert your Mailgun API key in api_key.  
 
 8. Run plane.py for testing (You can do this in the plane directory with all the .py files by doing "python3 plane.py" in your Terminal).
 
