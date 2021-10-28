@@ -1,11 +1,11 @@
 from collections import namedtuple, OrderedDict
 from functools import partial
 
-from meetings import m_gbm, m_watercooler, m_tech, m_planning
+from meetings import m_gbm, m_watercooler, m_tech, m_planning, m_design
 from util import Day, get_next_datetime
 
 
-DEFAULT_DELIVERY_HOUR = 10 # AM
+DEFAULT_DELIVERY_HOUR = 23 # AM
 f = partial(get_next_datetime, hour=DEFAULT_DELIVERY_HOUR)
 
 
@@ -18,9 +18,8 @@ weekly = PlaneSchema(
     f(Day.MONDAY), 
     {
         'gbm': m_gbm,
-        'watercooler': m_watercooler,
         'tech': m_tech,
-        'planning': m_planning,
+        'design': m_design,
     },
 )
 
