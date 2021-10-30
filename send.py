@@ -4,7 +4,10 @@ import webbrowser
 import time
 from email import utils
 
-from cli import prompt_confirm, prompt_subject
+import schema
+from cli import prompt_confirm, prompt_subject, prompt_hour, prompt_shour
+from util import Day, get_next_datetime
+from functools import partial
 class PlaneSendBase():
 
     def __init__(self, profile):
@@ -71,7 +74,8 @@ class PlaneSend(PlaneSendBase):
     def __init__(self, schema, profile):
         super().__init__(profile)
         self.subject = schema.subject or prompt_subject()
-        self.delivery_day = schema.delivery_day
+        f = partial(get_next_datetime, prompt_hour)
+        self.delivery_day = schema.delivery_day if prompt_shour() else f(2)
         self.kv = self._get_meeting_kv(schema.meetings)
         
         self.id = f'{self.path_root}/{schema.template}' 

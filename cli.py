@@ -59,3 +59,27 @@ def prompt_subject():
     ]
     answers = prompt(questions)
     return answers['subject']
+
+
+def prompt_shour(message="Are you fine with sending the email at 11 PM?"): 
+    questions = [
+        {
+            'type': 'confirm',
+            'name': 'confirm',
+            'message': message,
+        }
+    ]
+    answers = prompt(questions)
+    return answers['confirm']
+
+
+def prompt_hour(): 
+    questions = [
+        {
+            'type': 'input',
+            'name': 'hour',
+            'message': 'What hour do you want to send the email?'
+        }
+    ]
+    answers = prompt(questions)
+    return answers['hour']
