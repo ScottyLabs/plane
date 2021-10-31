@@ -24,11 +24,13 @@ def returnNewDate(default_date, new_date):
         difference = default_day - new_date
         send_date = default_date - datetime.timedelta(days = difference)
         #send date is in the past
+        #we add 7 days to the send date
         if today > send_date:
             send_date = send_date + datetime.timedelta(days = 7)
             return send_date
         else:
         #send date is in the future
+        #just return the send date
             return send_date
     else:
         #new_date > default_day
