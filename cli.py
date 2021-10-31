@@ -59,3 +59,29 @@ def prompt_subject():
     ]
     answers = prompt(questions)
     return answers['subject']
+
+
+def prompt_date():
+   dates = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+   questions = [
+            {
+                'type': 'list',
+                'name': 'date',
+                'message': 'On which day would you like to send the email?',
+                'choices' : dates
+            }
+       ]
+   answers = prompt(questions)
+   return answers['date']
+
+def prompt_confirmDate(delivery_date):
+    date = delivery_date.strftime("%A")
+    questions = [
+            {
+                'type' : 'confirm',
+                'name' : 'confirm',
+                'message' : f'Do you want to send this email on' + ' ' + date + '?',
+            }
+        ]
+    answers = prompt(questions)
+    return answers['confirm']

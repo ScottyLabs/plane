@@ -4,7 +4,9 @@ import webbrowser
 import time
 from email import utils
 
-from cli import prompt_confirm, prompt_subject
+from cli import prompt_confirm, prompt_subject, prompt_date, prompt_confirmDate
+from util import convert_StrtoDate, returnNewDate
+
 class PlaneSendBase():
 
     def __init__(self, profile):
@@ -71,9 +73,19 @@ class PlaneSend(PlaneSendBase):
     def __init__(self, schema, profile):
         super().__init__(profile)
         self.subject = schema.subject or prompt_subject()
-        self.delivery_day = schema.delivery_day
-        self.kv = self._get_meeting_kv(schema.meetings)
+        if prompt_confirmDate(schema.delivery_day) == False:
+            new_date = prompt_date()
+            #convert new_date to int
+            int_date = convert_StrtoDate(new_date)
+            input_date = returnNewDate(schema.delivery_day, int_date)
+            print(input_date, 'input_date')
+            print(schema.delivery_day, 'default_date')
+            self.delivery_day = input_date
+            print(self.delivery_day)
+        else:
+            self.delivery_day = schema.delivery_day
         
+        self.kv = self._get_meeting_kv(schema.meetings) 
         self.id = f'{self.path_root}/{schema.template}' 
         self.path_body = f'{self.id}/body.html'
         self.path_content = f'{self.id}/content.html'
@@ -134,4 +146,5 @@ class PlaneSend(PlaneSendBase):
         fh.seek(0)
         fh.write(populated_content)
         fh.close()
+
 

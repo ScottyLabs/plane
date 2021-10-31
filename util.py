@@ -12,6 +12,47 @@ class Day(IntEnum):
     SUNDAY = 6
 
 
+def returnNewDate(default_date, new_date):
+    #returns default day as an integer
+    #Monday is 0 sunday is 6
+    default_day = default_date.weekday()
+    today = datetime.datetime.now()
+    #if same day
+    if default_day == new_date:
+        return default_date
+    elif new_date < default_day:
+        difference = default_day - new_date
+        send_date = default_date - datetime.timedelta(days = difference)
+        #send date is in the past
+        if today > send_date:
+            send_date = send_date + datetime.timedelta(days = 7)
+            return send_date
+        else:
+        #send date is in the future
+            return send_date
+    else:
+        #new_date > default_day
+        difference = new_date - default_day
+        return default_date + datetime.timedelta(days = difference)
+
+                
+def convert_StrtoDate(str_date):
+    if str_date == 'Monday':
+        return Day.MONDAY
+    elif str_date == 'Tuesday':
+        return Day.TUESDAY
+    elif str_date == 'Wednesday':
+        return Day.WEDNESDAY
+    elif str_date == 'Thursday':
+        return Day.THURSDAY
+    elif str_date == 'Friday':
+        return Day.FRIDAY
+    elif str_date == 'Saturday':
+        return Day.SATURDAY
+    else:
+        return Day.SUNDAY
+
+
 def format_datetime(dt):
     '''
     Returns date in the format `Friday, 1 March`
