@@ -37,7 +37,7 @@ class PlaneSendBase():
         Replace occurences of keys in kv in s with values in kv
         '''
         for placeholder, replacement in kv.items():
-            if (replacement.startswith("https://")):
+            if (replacement.startswith("http")):
                 s = s.replace(placeholder, f"<a href={replacement}>Zoom</a>")
             else:
                 s = s.replace(placeholder, replacement)

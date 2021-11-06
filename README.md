@@ -33,8 +33,7 @@
     m_new = Meeting(
         'name',
         get_next_datetime_formatted(Day.DAY), #either Day.DAYOFWEEK or Day.TODAY
-        'time',
-        'Zoom link',
+        'location',
     )
 ```
 4. Import your new Meeting instance at the top of the schema.py file
@@ -42,8 +41,8 @@
 5. Create a new folder for your new email template name under HTML with the following files:
     - body.html # HTML formatting for the email
     - default.html # message body
-        - use ```{meeting_name}```, ```{meeting_date}```, ```{meeting_time}```, ```{meeting_zoom}``` respectively
-        - example: ```Come to our {new1_name} meeting on {new1_date} at {new1_time} over <a href="{reminder_zoom}">Zoom</a>!```
+        - use ```{meeting_name}```, ```{meeting_date}```, and ```{meeting_location}``` respectively
+        - example: ```Come to our {new1_name} meeting on {new1_date} at {new1_time} at {meeting_location}```
     - **note:** the content.html and backup.html files will be created/updated every time you run the program
 
 6. Now run plane.py in your terminal (macOS) or your command prompt (Windows) and make sure that your new template is an option!

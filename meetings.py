@@ -1,15 +1,13 @@
 from collections import namedtuple
 from util import Day, get_next_datetime_formatted
 
-Meeting = namedtuple('Meeting', 'name date time zoom room')
+Meeting = namedtuple('Meeting', 'name date time location')
 
 m_gbm = Meeting(
     'General Body Meeting',
     get_next_datetime_formatted(Day.THURSDAY),
     '6pm ET',
-    '',
-    'POS151',
-    #'http://href.scottylabs.org/zoom',
+    'POS 151',
 )
 
 m_watercooler = Meeting(
@@ -17,7 +15,6 @@ m_watercooler = Meeting(
     get_next_datetime_formatted(Day.SUNDAY),
     '9pm ET',
     'http://href.scottylabs.org/watercooler-zoom',
-    '',
 )
 
 m_tech = Meeting(
@@ -25,7 +22,6 @@ m_tech = Meeting(
     get_next_datetime_formatted(Day.SATURDAY),
     '2pm ET',
     'http://href.scottylabs.org/tech-zoom',
-    '',
 )
 
 m_planning = Meeting(
@@ -33,5 +29,4 @@ m_planning = Meeting(
     get_next_datetime_formatted(Day.SATURDAY),
     '12pm ET',
     'http://href.scottylabs.org/planning-zoom',
-    '',
 )
