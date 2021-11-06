@@ -75,7 +75,7 @@ class PlaneSend(PlaneSendBase):
         super().__init__(profile)
         self.subject = schema.subject or prompt_subject()
         f = partial(get_next_datetime, prompt_hour)
-        self.delivery_day = schema.delivery_day if prompt_shour() else f(2)
+        self.delivery_day = schema.delivery_day if prompt_shour() else get_next_datetime(2, int(prompt_hour()))
         self.kv = self._get_meeting_kv(schema.meetings)
         
         self.id = f'{self.path_root}/{schema.template}' 
