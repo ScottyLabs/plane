@@ -85,3 +85,29 @@ def prompt_confirmDate(delivery_date):
         ]
     answers = prompt(questions)
     return answers['confirm']
+
+def prompt_shour(message="Are you fine with sending the email at 11 PM?"): 
+    # we ask the user if they want to send the email at 11
+    # and then this returns a bool corresponding with their answer
+    questions = [
+        {
+            'type': 'confirm',
+            'name': 'confirm',
+            'message': message,
+        }
+    ]
+    answers = prompt(questions)
+    return answers['confirm']
+
+
+def prompt_hour(): 
+    # we ask the user what time they want to send the email
+    questions = [
+        {
+            'type': 'input',
+            'name': 'hour',
+            'message': 'What hour do you want to send the email?'
+        }
+    ]
+    answers = prompt(questions)
+    return answers['hour']

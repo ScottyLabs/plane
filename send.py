@@ -4,8 +4,8 @@ import webbrowser
 import time
 from email import utils
 
-from cli import prompt_confirm, prompt_subject, prompt_date, prompt_confirmDate
-from util import convert_StrtoDate, returnNewDate
+from cli import prompt_confirm, prompt_subject, prompt_date, prompt_confirmDate, prompt_shour, prompt_hour
+from util import convert_StrtoDate, get_next_datetime
 
 class PlaneSendBase():
 
@@ -73,17 +73,25 @@ class PlaneSend(PlaneSendBase):
     def __init__(self, schema, profile):
         super().__init__(profile)
         self.subject = schema.subject or prompt_subject()
-        if prompt_confirmDate(schema.delivery_day) == False:
+        # we check if the user actually wants to send on the default hour,
+        # and then if that's not the case, we get which time they actually want
+        # to send it and turn it into an int.
+        if prompt_shour() == True: 
+            delivery_hour = 23
+        else: 
+            delivery_hour = (int(prompt_hour()) % 24)
+        # (new_date = convert_StrtoDate(prompt_date)) if prompt_confirmDate(schema.delivery_day) else (new_date = schema.delivery_day)
+        if prompt_confirmDate(schema.delivery_day) == False: 
+            # if they don't want it to be sent on the default day,
+            # then prompt them for the new day, convert the response to an int
+            # and then use get_next_datetime to get the sending time
             new_date = prompt_date()
-            #convert new_date to int
             int_date = convert_StrtoDate(new_date)
-            input_date = returnNewDate(schema.delivery_day, int_date)
-            print(input_date, 'input_date')
-            print(schema.delivery_day, 'default_date')
-            self.delivery_day = input_date
-            print(self.delivery_day)
-        else:
-            self.delivery_day = schema.delivery_day
+            self.delivery_day = get_next_datetime(int_date, delivery_hour)
+        else: 
+            # otherwise, keep the original date, but get sending time as well
+            int_date = convert_StrtoDate(schema.delivery_day)
+            self.delivery_day = get_next_datetime(int_date, delivery_hour)
         
         self.kv = self._get_meeting_kv(schema.meetings) 
         self.id = f'{self.path_root}/{schema.template}' 
