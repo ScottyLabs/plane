@@ -4,7 +4,7 @@ import webbrowser
 import time
 from email import utils
 
-from cli import prompt_confirm, prompt_subject, prompt_date, prompt_confirmDate, prompt_shour, prompt_hour
+from cli import prompt_confirm, prompt_subject, prompt_date, prompt_confirmDate, prompt_shour, prompt_hour, prompt_defaultDateTime
 from util import convert_StrtoDate, get_next_datetime
 
 class PlaneSendBase():
@@ -73,26 +73,32 @@ class PlaneSend(PlaneSendBase):
     def __init__(self, schema, profile):
         super().__init__(profile)
         self.subject = schema.subject or prompt_subject()
-        # we check if the user actually wants to send on the default hour,
-        # and then if that's not the case, we get which time they actually want
-        # to send it and turn it into an int.
-        if prompt_shour() == True: 
-            delivery_hour = 23
-        else: 
+        # we check if the user wants to send on the default hour and default day
+        #if user wants to send on default day and time we return schema.delivery_day which is the default date and time
+        #from schema.py
+        if prompt_defaultDateTime(schema.delivery_day):
+            self.deliveryday = schema.delivery_day
+            
+        else:
+            #if user does not want to send on default date and time
+            #we prompt the user to choose a time and date
+            #we prompt the user to confirm the date and time they want
             delivery_hour = (int(prompt_hour()) % 24)
-        # (new_date = convert_StrtoDate(prompt_date)) if prompt_confirmDate(schema.delivery_day) else (new_date = schema.delivery_day)
-        if prompt_confirmDate(schema.delivery_day) == False: 
-            # if they don't want it to be sent on the default day,
-            # then prompt them for the new day, convert the response to an int
-            # and then use get_next_datetime to get the sending time
             new_date = prompt_date()
             int_date = convert_StrtoDate(new_date)
-            self.delivery_day = get_next_datetime(int_date, delivery_hour)
-        else: 
-            # otherwise, keep the original date, but get sending time as well
-            int_date = convert_StrtoDate(schema.delivery_day)
-            self.delivery_day = get_next_datetime(int_date, delivery_hour)
+            #prompt to confirmdate
+            delivery_day = get_next_datetime(int_date, delivery_hour)
+            #keep prompting if the user is not satisified with the delivery hour and date
+            while prompt_defaultDateTime(delivery_day) != True:
+                delivery_hour = (int(prompt_hour()) % 24)
+                new_date = prompt_date()
+                int_date = convert_StrtoDate(new_date)     
+                delivery_day = get_next_datetime(int_date, delivery_hour)
+            #return the delivery day to self.delivery day once the user has choosen the date and time that they want
+            self.delivery_day = delivery_day
         
+
+
         self.kv = self._get_meeting_kv(schema.meetings) 
         self.id = f'{self.path_root}/{schema.template}' 
         self.path_body = f'{self.id}/body.html'

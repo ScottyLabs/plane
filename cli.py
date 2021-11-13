@@ -74,6 +74,20 @@ def prompt_date():
    answers = prompt(questions)
    return answers['date']
 
+
+def prompt_defaultDateTime(delivery_date):
+    questions = [
+            {
+                'type' : 'confirm',
+                'name' : 'confirm',
+                'message' : f'Do you want to send this email on {delivery_date} ?',
+            }
+        ]
+    answers = prompt(questions)
+    return answers['confirm']
+
+
+
 def prompt_confirmDate(delivery_date):
     date = delivery_date.strftime("%A")
     questions = [
