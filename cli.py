@@ -95,7 +95,7 @@ def prompt_hour():
         {
             'type': 'input',
             'name': 'hour',
-            'message': 'When would you like to send the email?'
+            'message': 'What time would you like to send the email? Enter a time between 0 and 23'
         }
     ]
     answers = prompt(questions)
