@@ -4,7 +4,7 @@ import webbrowser
 import time
 from email import utils
 
-from cli import prompt_confirm, prompt_subject, prompt_date, prompt_confirmDate, prompt_shour, prompt_hour, prompt_defaultDateTime
+from cli import prompt_confirm, prompt_subject, prompt_date, prompt_hour, prompt_defaultDateTime
 from util import convert_StrtoDate, get_next_datetime
 
 class PlaneSendBase():

@@ -88,32 +88,6 @@ def prompt_defaultDateTime(delivery_date):
 
 
 
-def prompt_confirmDate(delivery_date):
-    date = delivery_date.strftime("%A")
-    questions = [
-            {
-                'type' : 'confirm',
-                'name' : 'confirm',
-                'message' : f'Do you want to send this email on' + ' ' + date + '?',
-            }
-        ]
-    answers = prompt(questions)
-    return answers['confirm']
-
-def prompt_shour(message="Are you fine with sending the email at 11 PM?"): 
-    # we ask the user if they want to send the email at 11
-    # and then this returns a bool corresponding with their answer
-    questions = [
-        {
-            'type': 'confirm',
-            'name': 'confirm',
-            'message': message,
-        }
-    ]
-    answers = prompt(questions)
-    return answers['confirm']
-
-
 def prompt_hour(): 
     # we ask the user what time they want to send the email
     questions = [
