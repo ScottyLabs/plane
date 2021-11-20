@@ -36,7 +36,7 @@ def prompt_profile():
         if profile.id == answers['profile']:
             return profile
 
-
+#prompt confirmation
 def prompt_confirm(message="Do you want to confirm?"):
     questions = [
         {
@@ -48,7 +48,7 @@ def prompt_confirm(message="Do you want to confirm?"):
     answers = prompt(questions)
     return answers['confirm']
 
-
+#Ask the user to input the subject of the email
 def prompt_subject():
     questions = [
         {
@@ -60,7 +60,8 @@ def prompt_subject():
     answers = prompt(questions)
     return answers['subject']
 
-
+#Ask the user to choose a date to send the email if they do not want to send the email
+#at the default date and time
 def prompt_date():
    dates = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
    questions = [
@@ -74,7 +75,7 @@ def prompt_date():
    answers = prompt(questions)
    return answers['date']
 
-
+#check with the user if they want to send the email at the default date and time
 def prompt_defaultDateTime(delivery_date):
     questions = [
             {
@@ -89,12 +90,12 @@ def prompt_defaultDateTime(delivery_date):
 
 
 def prompt_hour(): 
-    # we ask the user what time they want to send the email
+    # check with the user on when they would like to send the email 
     questions = [
         {
             'type': 'input',
             'name': 'hour',
-            'message': 'What hour do you want to send the email?'
+            'message': 'When would you like to send the email?'
         }
     ]
     answers = prompt(questions)
