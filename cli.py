@@ -80,7 +80,7 @@ def prompt_defaultDateTime(delivery_date):
             {
                 'type' : 'confirm',
                 'name' : 'confirm',
-                'message' : f'Do you want to send this email on {delivery_date} ?',
+                'message' : f'Do you want to send this email on {delivery_date}?',
             }
         ]
     answers = prompt(questions)

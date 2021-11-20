@@ -95,7 +95,7 @@ class PlaneSend(PlaneSendBase):
                 int_date = convert_StrtoDate(new_date)     
                 delivery_day = get_next_datetime(int_date, delivery_hour)
             #return the delivery day to self.delivery day once the user has choosen the date and time that they want
-            self.delivery_day = delivery_day
+            self.deliveryday = delivery_day
         
 
 
@@ -125,7 +125,7 @@ class PlaneSend(PlaneSendBase):
 
         # Send
         html = open(self.path_render, 'r').read()
-        response = self._PlaneSendBase__send(self.subject, html, self.delivery_day)
+        response = self._PlaneSendBase__send(self.subject, html, self.deliveryday)
         if response.status_code == 200:
             print("The email has been sent! ✈️")
         else:
