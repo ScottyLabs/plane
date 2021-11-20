@@ -4,7 +4,9 @@ import webbrowser
 import time
 from email import utils
 
-from cli import prompt_confirm, prompt_subject
+from cli import prompt_confirm, prompt_subject, prompt_date, prompt_hour, prompt_defaultDateTime
+from util import convert_StrtoDate, get_next_datetime
+
 class PlaneSendBase():
 
     def __init__(self, profile):
@@ -71,9 +73,33 @@ class PlaneSend(PlaneSendBase):
     def __init__(self, schema, profile):
         super().__init__(profile)
         self.subject = schema.subject or prompt_subject()
-        self.delivery_day = schema.delivery_day
-        self.kv = self._get_meeting_kv(schema.meetings)
+        # we check if the user wants to send on the default hour and default day
+        #if user wants to send on default day and time we return schema.delivery_day which is the default date and time
+        #from schema.py
+        if prompt_defaultDateTime(schema.delivery_day):
+            self.deliveryday = schema.delivery_day
+            
+        else:
+            #if user does not want to send on default date and time
+            #we prompt the user to choose a time and date
+            #we prompt the user to confirm the date and time they want
+            delivery_hour = (int(prompt_hour()) % 24)
+            new_date = prompt_date()
+            int_date = convert_StrtoDate(new_date)
+            #prompt to confirmdate
+            delivery_day = get_next_datetime(int_date, delivery_hour)
+            #keep prompting if the user is not satisified with the delivery hour and date
+            while prompt_defaultDateTime(delivery_day) != True:
+                delivery_hour = (int(prompt_hour()) % 24)
+                new_date = prompt_date()
+                int_date = convert_StrtoDate(new_date)     
+                delivery_day = get_next_datetime(int_date, delivery_hour)
+            #return the delivery day to self.delivery day once the user has choosen the date and time that they want
+            self.deliveryday = delivery_day
         
+
+
+        self.kv = self._get_meeting_kv(schema.meetings) 
         self.id = f'{self.path_root}/{schema.template}' 
         self.path_body = f'{self.id}/body.html'
         self.path_content = f'{self.id}/content.html'
@@ -99,7 +125,7 @@ class PlaneSend(PlaneSendBase):
 
         # Send
         html = open(self.path_render, 'r').read()
-        response = self._PlaneSendBase__send(self.subject, html, self.delivery_day)
+        response = self._PlaneSendBase__send(self.subject, html, self.deliveryday)
         if response.status_code == 200:
             print("The email has been sent! ✈️")
         else:
@@ -134,4 +160,5 @@ class PlaneSend(PlaneSendBase):
         fh.seek(0)
         fh.write(populated_content)
         fh.close()
+
 

@@ -11,6 +11,26 @@ class Day(IntEnum):
     SATURDAY = 5
     SUNDAY = 6
 
+                
+def convert_StrtoDate(str_date):
+    # we check what the string input of the user is
+    # and then we map each of those strings to the
+    # enumerated variant
+    if str_date == 'Monday':
+        return Day.MONDAY
+    elif str_date == 'Tuesday':
+        return Day.TUESDAY
+    elif str_date == 'Wednesday':
+        return Day.WEDNESDAY
+    elif str_date == 'Thursday':
+        return Day.THURSDAY
+    elif str_date == 'Friday':
+        return Day.FRIDAY
+    elif str_date == 'Saturday':
+        return Day.SATURDAY
+    else:
+        return Day.SUNDAY
+
 
 def format_datetime(dt):
     '''
