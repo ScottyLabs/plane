@@ -6,13 +6,12 @@ Meeting = namedtuple('Meeting', 'name date time location')
 m_gbm = Meeting(
     'General Body Meeting',
     get_next_datetime_formatted(Day.THURSDAY),
-<<<<<<< HEAD
+
     '5pm ET',
     'GHC 6115',
-=======
     '6pm ET',
     'POS 151',
->>>>>>> f950b72a42d50eb91a7b896b9e2fb442facfaf54
+
 )
 
 m_watercooler = Meeting(
