@@ -5,7 +5,7 @@ from meetings import m_gbm, m_watercooler, m_tech, m_planning, m_design
 from util import Day, get_next_datetime
 
 
-DEFAULT_DELIVERY_HOUR = 23 # AM
+DEFAULT_DELIVERY_HOUR = 10 # AM
 f = partial(get_next_datetime, hour=DEFAULT_DELIVERY_HOUR)
 
 
