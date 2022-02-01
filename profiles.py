@@ -19,6 +19,8 @@ class PlaneProfile(PlaneProfileBase):
 
 
 profiles = [
-    PlaneProfile('general', secrets.recepients_general),
-    PlaneProfile('testing', secrets.recepients_testing),
+    PlaneProfile('hackers', secrets.recipients_hackers),
+    PlaneProfile('sponsors', secrets.recipients_sponsors),
+    PlaneProfile('hackers+sponsors', secrets,recipients_hackers_and_sponsors),
+    PlaneProfile('testing', secrets.recipients_testing)
 ]
