@@ -21,6 +21,6 @@ class PlaneProfile(PlaneProfileBase):
 profiles = [
     PlaneProfile('hackers', secrets.recipients_hackers),
     PlaneProfile('sponsors', secrets.recipients_sponsors),
-    PlaneProfile('hackers+sponsors', secrets,recipients_hackers_and_sponsors),
+    PlaneProfile('hackers+sponsors', secrets.recipients_hackers_and_sponsors),
     PlaneProfile('testing', secrets.recipients_testing)
 ]
